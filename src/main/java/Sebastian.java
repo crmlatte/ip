@@ -84,7 +84,7 @@ public class Sebastian {
                         + " items in your list.");
             } else if (command.equals("MARK")) {
                 int index = Integer.valueOf(arg) - 1;
-                if (index > store.size() || index < 1) {
+                if (index >= store.size() || index < 0) {
                     throw new SebException("Oops! There are only " + store.size()
                             + " tasks.");
                 }
@@ -97,7 +97,7 @@ public class Sebastian {
                 );
             } else if (command.equals("UNMARK")) {
                 int index = Integer.valueOf(arg) - 1;
-                if (index > store.size() || index < 1) {
+                if (index >= store.size() || index < 0) {
                     throw new SebException("Oops! There are only " + store.size()
                     + " tasks.");
                 }
@@ -108,6 +108,14 @@ public class Sebastian {
                                 + "     "
                         + tt.toString()
                 );
+            } else if (command.equals("DELETE")) {
+                int index = Integer.valueOf(arg) - 1;
+                Task tt = store.get(index);
+                store.remove(index);
+                System.out.println("     Ok, I've removed this task:\n"
+                + "     " + tt.toString());
+                System.out.println("     Now you have " + store.size()
+                        + " items in your list.");
             } else {
                 throw new SebException("Sorry, I don't understand :(");
             }
