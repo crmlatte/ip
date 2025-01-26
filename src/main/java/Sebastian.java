@@ -41,13 +41,35 @@ public class Sebastian {
             } else if (command.equals("LIST")) {
                 System.out.println(seb.list());
 
-            } else if (command.equals("ADD")){
-                Task tt = new Task(arg);
+            } else if (command.equals("TODO")){
+                Task tt = new Todo(arg);
                 store.add(tt);
                 System.out.println("     "
-                        + "You have added:\n"
+                        + "You have added the task:\n"
                         + "     "
                         + tt.toString());
+                System.out.println("     Now you have " + store.size()
+                + " items in your list.");
+            } else if (command.equals("DEADLINE")) {
+                String[] sp = arg.split("/", 2);
+                Task tt = new Deadline(sp[0], sp[1]);
+                store.add(tt);
+                System.out.println("     "
+                        + "You have added the deadline:\n"
+                        + "     "
+                        + tt.toString());
+                System.out.println("     Now you have " + store.size()
+                        + " items in your list.");
+            } else if (command.equals("EVENT")) {
+                String[] sp = arg.split("/", 3);
+                Task tt = new Event(sp[0], sp[1], sp[2]);
+                store.add(tt);
+                System.out.println("     "
+                        + "You have added the event:\n"
+                        + "     "
+                        + tt.toString());
+                System.out.println("     Now you have " + store.size()
+                        + " items in your list.");
             } else if (command.equals("MARK")) {
                 int index = Integer.valueOf(arg) - 1;
                 Task tt = store.get(index);
