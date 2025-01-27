@@ -51,7 +51,7 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-            System.out.println("     Error loading tasks: " + e.getMessage());
+            System.out.println("Error loading tasks: " + e.getMessage());
         }
         return tasks;
     }
@@ -62,7 +62,7 @@ public class Storage {
                 writer.println(t.toFileFormat());
             }
         } catch (IOException e) {
-            System.out.println("     Error saving tasks: " + e.getMessage());
+            System.out.println("Error saving tasks: " + e.getMessage());
         }
     }
 }
