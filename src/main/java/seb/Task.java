@@ -4,8 +4,6 @@ import java.util.ArrayList;
 public abstract class Task {
 
     protected String description;
-    //private Task[] store = new Task[100]; // i think put in Seb class?
-    // then list() will also be in Seb class?
     protected boolean isDone;
 
     public Task(String description, boolean isDone) {
@@ -22,6 +20,10 @@ public abstract class Task {
     }
 
     public abstract String toFileFormat();
+
+    public String getDescription() {
+        return this.description;
+    }
 
     @Override
     public String toString() {

@@ -1,140 +1,92 @@
 package seb;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Sebastian {
-    static final String NEWLINE = "     --------------------------";
+
     private static final String FILEPATH = "./data/Sebastian.txt";
     private static Storage storage;
-    private static ArrayList<Task> store = new ArrayList<>(); // store tasks in the list
-    //String[] store = new String[100]; // store the input in array
+    private Ui ui;
+    private static TaskList tasks; // store tasks in the list
 
-    public Sebastian() {
-        storage = new Storage(FILEPATH);
-        store = storage.loadTasks();
-    }
-    public String list() {
-        String s = "     Here is your list:";
-        if (store.size() == 0) {
-            s = "     Your list is empty. Add some tasks!";
-        }
-        int counter = 1;
-        for (Task t : this.store) {
-            s += "\n     " + counter + ". " + t.toString();
-            counter++;
-        }
-        return s;
+    public Sebastian(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        tasks = new TaskList(storage.loadTasks());
     }
 
-
-    
-    public static void main(String[] args) throws SebException {
+    public void run() {
+        ui.welcome();
         Scanner s = new Scanner(System.in);
-        // welcome msg
-        System.out.println(NEWLINE
-        + "\n     Hello! I'm Sebastian~ "
-        + "\n     What can I do for you?\n"
-        + NEWLINE);
-
-        Sebastian seb = new Sebastian();
 
         while (true) {
             String input = s.nextLine();
-            String[] parts = input.split(" ", 2);
-            String command = parts[0].toUpperCase();
-            String arg = parts.length > 1 ? parts[1] : "";
 
-            System.out.println(NEWLINE);
+            try {
+                Command command = Parser.parse(input);
 
-            if (command.equals("BYE")) {
-                System.out.println("     Bye! See you again :D\n"
-                + NEWLINE);
-                break;
-            } else if (command.equals("LIST")) {
-                System.out.println(seb.list());
+                switch (command.getCommand()) {
+                    case "BYE":
+                        ui.bye();
+                        return;
 
-            } else if (command.equals("TODO")){
-                if (arg.isEmpty()) {
-                    throw new SebException("Oops! Description cannot be empty");
+                    case "LIST":
+                        ui.list(tasks.getTaskList());
+                        break;
+
+                    case "TODO":
+                        String desc = Parser.parseTodo(command.getArgs());
+                        tasks.addTask(new Todo(desc, false));
+                        storage.saveTasks(tasks.getTaskList());
+                        ui.showSuccess("You have successfully added task: " + desc);
+                        break;
+
+                    case "DEADLINE":
+                        String[] parts = Parser.parseDeadline(command.getArgs());
+                        tasks.addTask(new Deadline(parts[0], parts[1], false));
+                        storage.saveTasks(tasks.getTaskList());
+                        ui.showSuccess("You have successfully added deadline: " + parts[0]);
+                        break;
+
+                    case "EVENT":
+                        String[] parts2 = Parser.parseEvent(command.getArgs());
+                        tasks.addTask(new Event(parts2[0], parts2[1], parts2[2], false));
+                        storage.saveTasks(tasks.getTaskList());
+                        ui.showSuccess("You have successfully added event: " + parts2[0]);
+                        break;
+
+                    case "MARK":
+                        int index = Parser.parseNum(command.getArgs()) - 1;
+                        tasks.getTask(index).markDone();
+                        storage.saveTasks(tasks.getTaskList());
+                        ui.showSuccess("Great! You have completed: " + tasks.getTask(index).getDescription());
+                        break;
+
+                    case "UNMARK":
+                        int index2 = Parser.parseNum(command.getArgs()) - 1;
+                        tasks.getTask(index2).markNotDone();
+                        storage.saveTasks(tasks.getTaskList());
+                        ui.showSuccess("Okay, you have yet to finish: " + tasks.getTask(index2).getDescription());
+                        break;
+
+                    case "DELETE":
+                        int index3 = Parser.parseNum(command.getArgs()) - 1;
+                        Task deltask = tasks.getTask(index3);
+                        tasks.removeTask(index3);
+                        storage.saveTasks(tasks.getTaskList());
+                        ui.showSuccess("You have deleted: " + deltask.getDescription());
+                        break;
+
+                    default:
+                        ui.showError("Sorry, I didn't understand that.");
                 }
-                Task tt = new Todo(arg, false);
-                store.add(tt);
-                storage.saveTasks(store);
-                System.out.println("     "
-                        + "You have added the task:\n"
-                        + "       "
-                        + tt.toString());
-                System.out.println("     Now you have " + store.size()
-                + " items in your list.");
-            } else if (command.equals("DEADLINE")) {
-                String[] sp = arg.split("/", 2);
-                if (sp.length < 2 || sp[0].isEmpty() || sp[1].isEmpty()) {
-                    throw new SebException("Oops! Wrong Deadline format. Please use: deadline [name] /[by when]");
-                }
-                Task tt = new Deadline(sp[0], sp[1], false);
-                store.add(tt);
-                storage.saveTasks(store);
-                System.out.println("     "
-                        + "You have added the deadline:\n"
-                        + "       "
-                        + tt.toString());
-                System.out.println("     Now you have " + store.size()
-                        + " items in your list.");
-            } else if (command.equals("EVENT")) {
-                String[] sp = arg.split("/", 3);
-                if (sp.length < 3) {
-                    throw new SebException("Oops! Wrong Event format. Please use: event [name] /[from] /[to]");
-                }
-                Task tt = new Event(sp[0], sp[1], sp[2], false);
-                store.add(tt);
-                storage.saveTasks(store);
-                System.out.println("     "
-                        + "You have added the event:\n"
-                        + "       "
-                        + tt.toString());
-                System.out.println("     Now you have " + store.size()
-                        + " items in your list.");
-            } else if (command.equals("MARK")) {
-                int index = Integer.valueOf(arg) - 1;
-                if (index >= store.size() || index < 0) {
-                    throw new SebException("Oops! There are only " + store.size()
-                            + " tasks.");
-                }
-                Task tt = store.get(index);
-                tt.markDone();
-                storage.saveTasks(store);
-                System.out.println(
-                        "     Great job! You have completed:\n"
-                        + "     "
-                        + tt.toString()
-                );
-            } else if (command.equals("UNMARK")) {
-                int index = Integer.valueOf(arg) - 1;
-                if (index >= store.size() || index < 0) {
-                    throw new SebException("Oops! There are only " + store.size()
-                    + " tasks.");
-                }
-                Task tt = store.get(index);
-                tt.markNotDone();
-                storage.saveTasks(store);
-                System.out.println(
-                        "     Ok, I've marked this task as not done:\n"
-                                + "     "
-                        + tt.toString()
-                );
-            } else if (command.equals("DELETE")) {
-                int index = Integer.valueOf(arg) - 1;
-                Task tt = store.get(index);
-                store.remove(index);
-                storage.saveTasks(store);
-                System.out.println("     Ok, I've removed this task:\n"
-                + "     " + tt.toString());
-                System.out.println("     Now you have " + store.size()
-                        + " items in your list.");
-            } else {
-                throw new SebException("Sorry, I don't understand :(");
+            } catch (Exception e) {
+                ui.showError(e.getMessage());
             }
-            System.out.println(NEWLINE);
         }
-
+    }
+    
+    public static void main(String[] args) throws SebException {
+        new Sebastian(FILEPATH).run();
     }
 }
