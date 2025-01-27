@@ -1,4 +1,4 @@
-package seb;
+package seb.ui;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;

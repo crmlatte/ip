@@ -1,4 +1,4 @@
-package seb;
+package seb.ui;
 
 import java.util.ArrayList;
 

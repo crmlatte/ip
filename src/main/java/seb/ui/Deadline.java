@@ -1,4 +1,4 @@
-package seb;
+package seb.ui;
 public class Deadline extends Task {
 
     private String deadline;

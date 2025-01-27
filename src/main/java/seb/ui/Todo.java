@@ -1,4 +1,4 @@
-package seb;
+package seb.ui;
 public class Todo extends Task {
 
     public Todo(String desc, boolean isDone) {
