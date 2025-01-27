@@ -27,7 +27,6 @@ public class Sebastian {
 
     public static void main(String[] args) throws SebException {
         Scanner s = new Scanner(System.in);
-
         // welcome msg
         System.out.println(NEWLINE
         + "\n     Hello! I'm Sebastian~ "
