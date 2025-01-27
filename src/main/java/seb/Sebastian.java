@@ -25,6 +25,8 @@ public class Sebastian {
         return s;
     }
 
+
+    
     public static void main(String[] args) throws SebException {
         Scanner s = new Scanner(System.in);
         // welcome msg
