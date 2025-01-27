@@ -1,14 +1,18 @@
+package seb;
 public class Event extends Task {
-    private String description;
-    private boolean status;
+
     private String start;
     private String end;
 
-    public Event(String description, String start, String end) {
-        super(description);
-        this.status = false;
+    public Event(String description, String start, String end, boolean isDone) {
+        super(description, isDone);
         this.start = start;
         this.end = end;
+    }
+
+    @Override
+    public String toFileFormat() {
+        return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + this.start + " | " + this.end;
     }
 
     @Override
