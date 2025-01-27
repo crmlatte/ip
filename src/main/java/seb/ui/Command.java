@@ -1,4 +1,4 @@
-package seb;
+package seb.ui;
 
 public class Command {
 
