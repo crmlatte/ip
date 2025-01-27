@@ -2,6 +2,7 @@ package seb;
 public class Deadline extends Task {
 
     private String deadline;
+    private String test;
 
     public Deadline(String description, String deadline, boolean isDone) {
         super(description, isDone);
