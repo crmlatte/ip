@@ -28,6 +28,7 @@ public class Sebastian {
         while (true) {
             System.out.println("----------------------------------------------");
             String input = s.nextLine();
+            System.out.println("----------------------------------------------");
 
             try {
                 Command command = Parser.parse(input);
