@@ -5,6 +5,10 @@ public class Todo extends Task {
         super(desc, isDone);
     }
 
+    /**
+     * Converts Todo object to String to be stored in data file
+     * @return String of event details
+     */
     @Override
     public String toFileFormat() {
         return "T | " + (isDone ? "1" : "0") + " | " + description;

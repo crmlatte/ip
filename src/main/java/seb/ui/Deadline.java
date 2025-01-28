@@ -9,6 +9,10 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    /**
+     * Converts Deadline object to String to be stored in data file
+     * @return String of event details
+     */
     @Override
     public String toFileFormat() {
         return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + this.deadline;

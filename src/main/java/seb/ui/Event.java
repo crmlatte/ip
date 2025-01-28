@@ -10,6 +10,10 @@ public class Event extends Task {
         this.end = end;
     }
 
+    /**
+     * Converts Event object to String to be stored in data file
+     * @return String of event details
+     */
     @Override
     public String toFileFormat() {
         return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + this.start + " | " + this.end;
