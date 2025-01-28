@@ -15,7 +15,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getDate() {
-        return this.deadline;
+        return this.deadLine;
     }
 
     @Override

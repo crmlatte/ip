@@ -1,8 +1,5 @@
 package seb.ui;
-<<<<<<< HEAD
-=======
 import java.time.format.DateTimeParseException;
->>>>>>> branch-Level-8
 import java.util.ArrayList;
 
 public class TaskList {

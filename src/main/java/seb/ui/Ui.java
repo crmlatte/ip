@@ -48,7 +48,6 @@ public class Ui {
         System.out.println(message);
     }
 
-<<<<<<< HEAD
     public void find(ArrayList<Task> tasks, String search) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
@@ -67,7 +66,4 @@ public class Ui {
             }
         }
     }
-=======
-
->>>>>>> branch-Level-8
 }
