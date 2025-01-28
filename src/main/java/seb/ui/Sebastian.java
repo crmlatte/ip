@@ -43,14 +43,14 @@ public class Sebastian {
 
                     case "DEADLINE":
                         String[] parts = Parser.parseDeadline(command.getArgs());
-                        tasks.addTask(new Deadline(parts[0], parts[1], false));
+                        tasks.addTask(new Deadline(parts[0], Parser.parseDateTime(parts[1]), false));
                         storage.saveTasks(tasks.getTaskList());
                         ui.showSuccess("You have successfully added deadline: " + parts[0]);
                         break;
 
                     case "EVENT":
                         String[] parts2 = Parser.parseEvent(command.getArgs());
-                        tasks.addTask(new Event(parts2[0], parts2[1], parts2[2], false));
+                        tasks.addTask(new Event(parts2[0], Parser.parseDateTime(parts2[1]), Parser.parseDateTime(parts2[2]), false));
                         storage.saveTasks(tasks.getTaskList());
                         ui.showSuccess("You have successfully added event: " + parts2[0]);
                         break;
@@ -78,7 +78,7 @@ public class Sebastian {
                         break;
 
                     default:
-                        ui.showError("Sorry, I didn't understand that.");
+                        ui.showError("Sorry, I didn't understand that :(");
                 }
             } catch (Exception e) {
                 ui.showError(e.getMessage());
