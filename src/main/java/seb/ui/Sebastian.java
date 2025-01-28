@@ -79,8 +79,17 @@ public class Sebastian {
                     ui.showSuccess("You have deleted: " + deltask.getDescription());
                     break;
 
+<<<<<<< HEAD
                 default:
                     ui.showError("Sorry, I didn't understand that.");
+=======
+                    case "FIND":
+                        ui.find(tasks.getTaskList(), command.getArgs());
+                        break;
+
+                    default:
+                        ui.showError("Sorry, I didn't understand that.");
+>>>>>>> branch-Level-9
                 }
             } catch (Exception e) {
                 ui.showError(e.getMessage());
