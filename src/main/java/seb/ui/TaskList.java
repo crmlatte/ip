@@ -59,17 +59,32 @@ public class TaskList {
         return tasks;
     }
 
-    public void showDates(String dateTime) throws SebException {
+    /**
+     * Prints all tasks on given date
+     * @param dateInput String input of date, no time
+     * @throws SebException for incorrect date format
+     */
+    public void showDates(String dateInput) throws SebException {
         // in E, dd MMM yyyy format
-        System.out.println("You have these tasks on " + dateTime);
+        ArrayList<Task> matchingDates = new ArrayList<>();
         for (Task task : tasks) {
             // cut out time to compare date in E
             if (task.getDate().isEmpty()) {
                 continue;
             }
             String date = task.getDate().substring(0, task.getDate().lastIndexOf(" "));
-            if (dateTime.equals(date)) {
-                System.out.println(task.toString());
+            if (dateInput.equals(date)) {
+                matchingDates.add(task);
+            }
+        }
+        if (matchingDates.isEmpty()) {
+            System.out.println("Yay! You have no tasks on " + dateInput);
+        } else {
+            System.out.println("You have these tasks on " + dateInput);
+            int counter = 1;
+            for (int i = 0; i < matchingDates.size(); i++) {
+                System.out.println(counter + ". " + matchingDates.get(i).toString());
+                counter++;
             }
         }
     }
