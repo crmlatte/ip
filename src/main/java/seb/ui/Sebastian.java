@@ -16,6 +16,10 @@ public class Sebastian {
         tasks = new TaskList(storage.loadTasks());
     }
 
+    /**
+     * Prints out data after parsing command-line input and
+     * drawing data from tasks stored in TaskList
+     */
     public void run() {
         //run programme
         ui.welcome();
