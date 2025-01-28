@@ -9,18 +9,14 @@ public class Ui {
      * Welcome message printed when Sebastian runs
      */
     public void welcome() {
-        System.out.println("----------------------------------------------");
         System.out.println("Hello! My name is Sebastian~\nHow can i help you? :)");
-        System.out.println("----------------------------------------------");
     }
 
     /**
      * Exit message printed for command-line input "bye"
      */
     public void bye() {
-        System.out.println("----------------------------------------------");
         System.out.println("Bye! See you again :D");
-        System.out.println("----------------------------------------------");
     }
 
     /**
@@ -28,7 +24,6 @@ public class Ui {
      * @param tasks list of all tasks
      */
     public void list(ArrayList<Task> tasks) {
-        System.out.println("----------------------------------------------");
         if (tasks.isEmpty()) {
             System.out.println("Your list is empty. Please add some tasks!");
         } else {
@@ -39,7 +34,6 @@ public class Ui {
                 counter++;
             }
         }
-        System.out.println("----------------------------------------------");
     }
 
     /**
@@ -54,6 +48,7 @@ public class Ui {
         System.out.println(message);
     }
 
+<<<<<<< HEAD
     public void find(ArrayList<Task> tasks, String search) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
@@ -72,4 +67,7 @@ public class Ui {
             }
         }
     }
+=======
+
+>>>>>>> branch-Level-8
 }

@@ -21,11 +21,16 @@ public class Sebastian {
      * drawing data from tasks stored in TaskList
      */
     public void run() {
+<<<<<<< HEAD
         //run programme
+=======
+        System.out.println("----------------------------------------------");
+>>>>>>> branch-Level-8
         ui.welcome();
         Scanner s = new Scanner(System.in);
 
         while (true) {
+            System.out.println("----------------------------------------------");
             String input = s.nextLine();
 
             try {
@@ -47,6 +52,7 @@ public class Sebastian {
                     ui.showSuccess("You have successfully added task: " + desc);
                     break;
 
+<<<<<<< HEAD
                 case "DEADLINE":
                     String[] parts = Parser.parseDeadline(command.getArgs());
                     tasks.addTask(new Deadline(parts[0], parts[1], false));
@@ -60,6 +66,21 @@ public class Sebastian {
                     storage.saveTasks(tasks.getTaskList());
                     ui.showSuccess("You have successfully added event: " + parts2[0]);
                     break;
+=======
+                    case "DEADLINE":
+                        String[] parts = Parser.parseDeadline(command.getArgs());
+                        tasks.addTask(new Deadline(parts[0], Parser.parseDateTime(parts[1]), false));
+                        storage.saveTasks(tasks.getTaskList());
+                        ui.showSuccess("You have successfully added deadline: " + parts[0]);
+                        break;
+
+                    case "EVENT":
+                        String[] parts2 = Parser.parseEvent(command.getArgs());
+                        tasks.addTask(new Event(parts2[0], Parser.parseDateTime(parts2[1]), Parser.parseDateTime(parts2[2]), false));
+                        storage.saveTasks(tasks.getTaskList());
+                        ui.showSuccess("You have successfully added event: " + parts2[0]);
+                        break;
+>>>>>>> branch-Level-8
 
                 case "MARK":
                     int index = Parser.parseNum(command.getArgs()) - 1;
@@ -91,9 +112,17 @@ public class Sebastian {
                         ui.find(tasks.getTaskList(), command.getArgs());
                         break;
 
+                    case "DATE":
+                        tasks.showDates(Parser.parseShowDate(command.getArgs()));
+                        break;
+
                     default:
+<<<<<<< HEAD
                         ui.showError("Sorry, I didn't understand that.");
 >>>>>>> branch-Level-9
+=======
+                        ui.showError("Sorry, I didn't understand that :(");
+>>>>>>> branch-Level-8
                 }
             } catch (Exception e) {
                 ui.showError(e.getMessage());

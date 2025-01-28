@@ -21,6 +21,8 @@ public abstract class Task {
 
     public abstract String toFileFormat();
 
+    public abstract String getDate();
+
     public String getDescription() {
         return this.description;
     }

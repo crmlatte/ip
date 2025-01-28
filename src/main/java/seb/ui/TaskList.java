@@ -1,4 +1,8 @@
 package seb.ui;
+<<<<<<< HEAD
+=======
+import java.time.format.DateTimeParseException;
+>>>>>>> branch-Level-8
 import java.util.ArrayList;
 
 public class TaskList {
@@ -56,5 +60,20 @@ public class TaskList {
      */
     public ArrayList<Task> getTaskList() {
         return tasks;
+    }
+
+    public void showDates(String dateTime) throws SebException {
+        // in E, dd MMM yyyy format
+        System.out.println("You have these tasks on " + dateTime);
+        for (Task task : tasks) {
+            // cut out time to compare date in E
+            if (task.getDate().isEmpty()) {
+                continue;
+            }
+            String date = task.getDate().substring(0, task.getDate().lastIndexOf(" "));
+            if (dateTime.equals(date)) {
+                System.out.println(task.toString());
+            }
+        }
     }
 }

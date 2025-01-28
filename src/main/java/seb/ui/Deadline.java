@@ -14,6 +14,11 @@ public class Deadline extends Task {
      * @return String of event details
      */
     @Override
+    public String getDate() {
+        return this.deadline;
+    }
+
+    @Override
     public String toFileFormat() {
         return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + this.deadLine;
     }

@@ -10,6 +10,11 @@ public class Todo extends Task {
      * @return String of event details
      */
     @Override
+    public String getDate() {
+        return "";
+    }
+
+    @Override
     public String toFileFormat() {
         return "T | " + (isDone ? "1" : "0") + " | " + description;
     }
