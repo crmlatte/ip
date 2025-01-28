@@ -1,4 +1,5 @@
 package seb.ui;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -62,6 +63,17 @@ public class Parser {
         } catch (DateTimeParseException e) {
             throw new SebException("Invalid date-time format! Please use dd-mm-yyyy HHmm");
         }
+    }
 
+    public static String parseShowDate(String input) throws SebException {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            LocalDate dateTime = LocalDate.parse(input, formatter);
+            DateTimeFormatter formatOutput = DateTimeFormatter.ofPattern("E, dd MMM yyyy");
+            String ftd = dateTime.format(formatOutput);
+            return ftd;
+        } catch (DateTimeParseException e) {
+            throw new SebException("Invalid date-time format! Please use dd-mm-yyyy");
+        }
     }
 }

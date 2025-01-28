@@ -10,6 +10,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getDate() {
+        return this.deadline;
+    }
+
+    @Override
     public String toFileFormat() {
         return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + this.deadline;
     }

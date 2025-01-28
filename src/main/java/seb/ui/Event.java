@@ -11,6 +11,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String getDate() {
+        return this.start;
+    }
+
+    @Override
     public String toFileFormat() {
         return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + this.start + " | " + this.end;
     }

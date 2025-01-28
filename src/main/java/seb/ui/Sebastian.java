@@ -16,10 +16,12 @@ public class Sebastian {
     }
 
     public void run() {
+        System.out.println("----------------------------------------------");
         ui.welcome();
         Scanner s = new Scanner(System.in);
 
         while (true) {
+            System.out.println("----------------------------------------------");
             String input = s.nextLine();
 
             try {
@@ -75,6 +77,10 @@ public class Sebastian {
                         tasks.removeTask(index3);
                         storage.saveTasks(tasks.getTaskList());
                         ui.showSuccess("You have deleted: " + deltask.getDescription());
+                        break;
+
+                    case "DATE":
+                        tasks.showDates(Parser.parseShowDate(command.getArgs()));
                         break;
 
                     default:

@@ -7,19 +7,14 @@ public class Ui {
     public Ui() {}
 
     public void welcome() {
-        System.out.println("----------------------------------------------");
         System.out.println("Hello! My name is Sebastian~\nHow can i help you? :)");
-        System.out.println("----------------------------------------------");
     }
 
     public void bye() {
-        System.out.println("----------------------------------------------");
         System.out.println("Bye! See you again :D");
-        System.out.println("----------------------------------------------");
     }
 
     public void list(ArrayList<Task> tasks) {
-        System.out.println("----------------------------------------------");
         if (tasks.isEmpty()) {
             System.out.println("Your list is empty. Please add some tasks!");
         } else {
@@ -30,7 +25,6 @@ public class Ui {
                 counter++;
             }
         }
-        System.out.println("----------------------------------------------");
     }
 
     public void showError(String message) {
@@ -40,4 +34,6 @@ public class Ui {
     public void showSuccess(String message) {
         System.out.println(message);
     }
+
+
 }
