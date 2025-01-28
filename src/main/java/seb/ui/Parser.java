@@ -86,6 +86,13 @@ public class Parser {
         return Integer.parseInt(input);
     }
 
+    /**
+     * Return String of date time converted to readable format
+     * eg from input 24-01-2025 1600 -> Fri, 24 Jan 2025 16:00
+     * @param input String of date time from Command args
+     * @return String of date time in reader friendly format
+     * @throws SebException for incorrect format of input
+     */
     public static String parseDateTime(String input) throws SebException {
         try {
             DateTimeFormatter formatInput = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
@@ -98,6 +105,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns String of date formatted from input
+     * eg 24-01-2025 -> Fri, 24 Jan 2025
+     * Used for finding tasks by date in showDates() function in TaskList
+     * @param input String from command-line Command args
+     * @return String of formatted date
+     * @throws SebException for incorrect format of date
+     */
     public static String parseShowDate(String input) throws SebException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
