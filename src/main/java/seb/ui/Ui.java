@@ -23,7 +23,7 @@ public class Ui {
         if (tasks.isEmpty()) {
             System.out.println("Your list is empty. Please add some tasks!");
         } else {
-            System.out.println("Here is your list: ");
+            System.out.println("Here is your list:");
             int counter = 1;
             for (int i = 0; i < tasks.size(); i++) {
                 System.out.println(counter + ". " + tasks.get(i).toString());
