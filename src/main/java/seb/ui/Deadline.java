@@ -1,12 +1,12 @@
 package seb.ui;
+
 public class Deadline extends Task {
 
-    private String deadline;
-    private String test;
+    private String deadLine;
 
-    public Deadline(String description, String deadline, boolean isDone) {
+    public Deadline(String description, String deadLine, boolean isDone) {
         super(description, isDone);
-        this.deadline = deadline;
+        this.deadLine = deadLine;
     }
 
     /**
@@ -15,11 +15,11 @@ public class Deadline extends Task {
      */
     @Override
     public String toFileFormat() {
-        return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + this.deadline;
+        return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + this.deadLine;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.deadline + ")";
+        return "[D]" + super.toString() + " (by: " + this.deadLine + ")";
     }
 }
