@@ -48,6 +48,11 @@ public class Ui {
         System.out.println(message);
     }
 
+    /**
+     * Prints all tasks with matching description with input String
+     * @param tasks ArrayList<Task> tasks
+     * @param search String of keyword to match
+     */
     public void find(ArrayList<Task> tasks, String search) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
