@@ -16,6 +16,7 @@ public class Sebastian {
     }
 
     public void run() {
+        //run programme
         ui.welcome();
         Scanner s = new Scanner(System.in);
 
