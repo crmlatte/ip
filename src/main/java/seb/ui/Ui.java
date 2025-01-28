@@ -40,4 +40,23 @@ public class Ui {
     public void showSuccess(String message) {
         System.out.println(message);
     }
+
+    public void find(ArrayList<Task> tasks, String search) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().contains(search)) {
+                matchingTasks.add(tasks.get(i));
+            }
+        }
+        if (matchingTasks.isEmpty()) {
+            System.out.println("There are no matching tasks.");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            int counter = 1;
+            for (int i = 0; i < matchingTasks.size(); i++) {
+                System.out.println(counter + ". " + matchingTasks.get(i).toString());
+                counter++;
+            }
+        }
+    }
 }

@@ -77,6 +77,10 @@ public class Sebastian {
                         ui.showSuccess("You have deleted: " + deltask.getDescription());
                         break;
 
+                    case "FIND":
+                        ui.find(tasks.getTaskList(), command.getArgs());
+                        break;
+
                     default:
                         ui.showError("Sorry, I didn't understand that.");
                 }
