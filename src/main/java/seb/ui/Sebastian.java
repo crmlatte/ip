@@ -90,7 +90,7 @@ public class Sebastian {
                     break;
 
                 case "DATE":
-                    tasks.showDates(Parser.parseShowDate(command.getArgs()));
+                    ui.showDates(tasks.getTaskList(), Parser.parseShowDate(command.getArgs()));
                     break;
                     
                 default:

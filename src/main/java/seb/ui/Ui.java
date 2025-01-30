@@ -9,7 +9,7 @@ public class Ui {
      * Welcome message printed when Sebastian runs
      */
     public void welcome() {
-        System.out.println("Hello! My name is Sebastian~\nHow can i help you? :)");
+        System.out.println("Hello! My name is Sebastian~\nHow can I help you? :)");
     }
 
     /**
@@ -46,6 +46,36 @@ public class Ui {
 
     public void showSuccess(String message) {
         System.out.println(message);
+    }
+
+    /**
+     * Prints all tasks on given date
+     * @param dateInput String input of date, no time
+     * @throws SebException for incorrect date format
+     */
+    public void showDates(ArrayList<Task> tasks, String dateInput) throws SebException {
+        // in E, dd MMM yyyy format
+        ArrayList<Task> matchingDates = new ArrayList<>();
+        for (Task task : tasks) {
+            // cut out time to compare date in E
+            if (task.getDate().isEmpty()) {
+                continue;
+            }
+            String date = task.getDate().substring(0, task.getDate().lastIndexOf(" "));
+            if (dateInput.equals(date)) {
+                matchingDates.add(task);
+            }
+        }
+        if (matchingDates.isEmpty()) {
+            System.out.println("Yay! You have no tasks on " + dateInput);
+        } else {
+            System.out.println("You have " + matchingDates.size() + " tasks on " + dateInput);
+            int counter = 1;
+            for (int i = 0; i < matchingDates.size(); i++) {
+                System.out.println(counter + ". " + matchingDates.get(i).toString());
+                counter++;
+            }
+        }
     }
 
     /**
