@@ -1,6 +1,4 @@
 package seb.ui;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Sebastian {
@@ -11,8 +9,8 @@ public class Sebastian {
     private static TaskList tasks; // store tasks in the list
 
     public Sebastian(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
+        ui = new Ui();
         tasks = new TaskList(storage.loadTasks());
     }
 

@@ -1,5 +1,8 @@
 package seb.ui;
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,9 +15,9 @@ public class Storage {
     }
 
     /**
-     * Loads tasks from the file into ArrayList<Task>.
-     * Creates the file and directory if they dont exit
-     * @return tasks in an ArrayList<Task>.
+     * Loads tasks from the file into ArrayList
+     * Creates the file and directory if they don't exit
+     * @return tasks in an ArrayList
      */
     public ArrayList<Task> loadTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -36,18 +39,18 @@ public class Storage {
                 String description = parts[2];
 
                 switch (taskType) {
-                    case "T":
-                        tasks.add(new Todo(description, isDone));
-                        break;
-                    case "D":
-                        String due = parts[3];
-                        tasks.add(new Deadline(description, due, isDone));
-                        break;
-                    case "E":
-                        String start = parts[3];
-                        String end = parts[4];
-                        tasks.add(new Event(description, start, end, isDone));
-                        break;
+                case "T":
+                    tasks.add(new Todo(description, isDone));
+                    break;
+                case "D":
+                    String due = parts[3];
+                    tasks.add(new Deadline(description, due, isDone));
+                    break;
+                case "E":
+                    String start = parts[3];
+                    String end = parts[4];
+                    tasks.add(new Event(description, start, end, isDone));
+                    break;
                 }
             }
         } catch (IOException e) {

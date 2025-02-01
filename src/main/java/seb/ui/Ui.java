@@ -20,7 +20,7 @@ public class Ui {
     }
 
     /**
-     * Prints all tasks stored in ArrayList<Task>
+     * Prints all tasks stored in ArrayList
      * @param tasks list of all tasks
      */
     public void list(ArrayList<Task> tasks) {
@@ -80,7 +80,7 @@ public class Ui {
 
     /**
      * Prints all tasks with matching description with input String
-     * @param tasks ArrayList<Task> tasks
+     * @param tasks ArrayList tasks
      * @param search String of keyword to match
      */
     public void find(ArrayList<Task> tasks, String search) {

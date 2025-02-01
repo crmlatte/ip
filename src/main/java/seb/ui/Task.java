@@ -1,5 +1,4 @@
 package seb.ui;
-import java.util.ArrayList;
 
 public abstract class Task {
 
@@ -29,6 +28,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return (this.isDone ? "[X]" : "[ ]") +  " " + this.description;
+        return (this.isDone ? "[X]" : "[ ]") + " " + this.description;
     }
 }

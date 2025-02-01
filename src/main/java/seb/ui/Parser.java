@@ -28,7 +28,7 @@ public class Parser {
     }
 
     /**
-     * Returns a String that checks if Todo input is an empty tasj
+     * Returns a String that checks if Todo input is an empty task
      * @param input Args of the Command (description of todo)
      * @return String description of todo
      * @throws SebException if todo description is empty
