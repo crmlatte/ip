@@ -52,8 +52,8 @@ public class Parser {
         if (parts.length != 2) {
             throw new SebException("Invalid Deadline format. Please use: deadline [name] /[by when]");
         }
-        for (String s : parts) {
-            s.trim();
+        for (int i = 0; i < parts.length; i++) {
+            parts[i] = parts[i].trim();
         }
         return parts;
     }
@@ -70,8 +70,8 @@ public class Parser {
         if (parts.length != 3) {
             throw new SebException("Invalid Event format. Please use: event [name] /[from] /[to]");
         }
-        for (String s : parts) {
-            s.trim();
+        for (int i = 0; i < parts.length; i++) {
+            parts[i] = parts[i].trim();
         }
         return parts;
     }
