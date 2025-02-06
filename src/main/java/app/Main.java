@@ -7,13 +7,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import seb.ui.Sebastian;
 
 /**
  * A GUI for Seb using FXML.
  */
 public class Main extends Application {
 
-    private Seb seb = new Seb();
+    private Sebastian sebastian = new Sebastian("./data/Sebastian.txt");
 
     @Override
     public void start(Stage stage) {
@@ -22,7 +23,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setSeb(seb);  // inject the Seb instance
+            fxmlLoader.<MainWindow>getController().setSeb(sebastian);  // inject the Seb instance
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

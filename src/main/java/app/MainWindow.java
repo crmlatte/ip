@@ -7,6 +7,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import seb.ui.Sebastian;
+
 /**
  * Controller for the main GUI.
  */
@@ -20,7 +22,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Seb seb;
+    //private Seb seb;
+    private Sebastian sebastian;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/userphoto.jpeg"));
     private Image sebImage = new Image(this.getClass().getResourceAsStream("/images/sebphoto.jpeg"));
@@ -31,8 +34,8 @@ public class MainWindow extends AnchorPane {
     }
 
     /** Injects the Seb instance */
-    public void setSeb(Seb s) {
-        seb = s;
+    public void setSeb(Sebastian seb) {
+        this.sebastian = seb;
     }
 
     /**
@@ -42,7 +45,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = seb.getResponse(input);
+        String response = sebastian.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getSebDialog(response, sebImage)
