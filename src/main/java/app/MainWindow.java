@@ -2,6 +2,7 @@ package app;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -31,12 +32,17 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        if (sebastian != null) {
+            dialogContainer.getChildren().add(
+                    DialogBox.getSebDialog(sebastian.getWelcomeMessage(), sebImage));
+        }
     }
 
     /** Injects the Seb instance */
     public void setSeb(Sebastian seb) {
         this.sebastian = seb;
-    }
+        dialogContainer.getChildren().add(
+                DialogBox.getSebDialog(sebastian.getWelcomeMessage(), sebImage));    }
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Seb's reply and then appends them to

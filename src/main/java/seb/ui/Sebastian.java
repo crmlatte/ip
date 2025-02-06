@@ -33,7 +33,6 @@ public class Sebastian {
             //System.out.println("----------------------------------------------");
 
             if (input.equalsIgnoreCase("bye")) {
-                ui.bye();
                 return;
             }
         }
@@ -55,70 +54,73 @@ public class Sebastian {
             Command command = Parser.parse(input);
 
             switch (command.getCommand()) {
-                case "BYE":
-                    return captureOutput(() -> ui.bye());
+            case "BYE":
+                return captureOutput(() -> ui.bye());
 
-                case "LIST":
-                    return captureOutput(() -> ui.list(tasks.getTaskList()));
+            case "LIST":
+                return captureOutput(() -> ui.list(tasks.getTaskList()));
 
-                case "TODO":
-                    String desc = Parser.parseTodo(command.getArgs());
-                    tasks.addTask(new Todo(desc, false));
-                    storage.saveTasks(tasks.getTaskList());
-                    return captureOutput(() -> ui.showSuccess("You have successfully added task: " + desc));
+            case "TODO":
+                String desc = Parser.parseTodo(command.getArgs());
+                tasks.addTask(new Todo(desc, false));
+                storage.saveTasks(tasks.getTaskList());
+                return captureOutput(() -> ui.showSuccess("You have successfully added task: " + desc));
 
-                case "DEADLINE":
-                    String[] parts = Parser.parseDeadline(command.getArgs());
-                    tasks.addTask(new Deadline(parts[0], parts[1], false));
-                    storage.saveTasks(tasks.getTaskList());
-                    return captureOutput(() -> ui.showSuccess("You have successfully added deadline: " + parts[0]));
+            case "DEADLINE":
+                String[] parts = Parser.parseDeadline(command.getArgs());
+                tasks.addTask(new Deadline(parts[0], parts[1], false));
+                storage.saveTasks(tasks.getTaskList());
+                return captureOutput(() -> ui.showSuccess("You have successfully added deadline: " + parts[0]));
 
-                case "EVENT":
-                    String[] parts2 = Parser.parseEvent(command.getArgs());
-                    tasks.addTask(new Event(parts2[0], parts2[1], parts2[2], false));
-                    storage.saveTasks(tasks.getTaskList());
-                    return captureOutput(() -> ui.showSuccess("You have successfully added event: " + parts2[0]));
+            case "EVENT":
+                String[] parts2 = Parser.parseEvent(command.getArgs());
+                tasks.addTask(new Event(parts2[0], parts2[1], parts2[2], false));
+                storage.saveTasks(tasks.getTaskList());
+                return captureOutput(() -> ui.showSuccess("You have successfully added event: " + parts2[0]));
 
-                case "MARK":
-                    int index = Parser.parseNum(command.getArgs()) - 1;
-                    tasks.getTask(index).markDone();
-                    storage.saveTasks(tasks.getTaskList());
-                    return captureOutput(() -> ui.showSuccess("Great! You have completed: " + tasks.getTask(index).getDescription()));
+            case "MARK":
+                int index = Parser.parseNum(command.getArgs()) - 1;
+                tasks.getTask(index).markDone();
+                storage.saveTasks(tasks.getTaskList());
+                return captureOutput(() -> ui.showSuccess("Great! You have completed: " + tasks.getTask(index).getDescription()));
 
-                case "UNMARK":
-                    int index2 = Parser.parseNum(command.getArgs()) - 1;
-                    tasks.getTask(index2).markNotDone();
-                    storage.saveTasks(tasks.getTaskList());
-                    return captureOutput(() -> ui.showSuccess("Okay, you have yet to finish: " + tasks.getTask(index2).getDescription()));
+            case "UNMARK":
+                int index2 = Parser.parseNum(command.getArgs()) - 1;
+                tasks.getTask(index2).markNotDone();
+                storage.saveTasks(tasks.getTaskList());
+                return captureOutput(() -> ui.showSuccess("Okay, you have yet to finish: " + tasks.getTask(index2).getDescription()));
 
-                case "DELETE":
-                    int index3 = Parser.parseNum(command.getArgs()) - 1;
-                    Task deltask = tasks.getTask(index3);
-                    tasks.removeTask(index3);
-                    storage.saveTasks(tasks.getTaskList());
-                    return captureOutput(() -> ui.showSuccess("You have deleted: " + deltask.getDescription()));
+            case "DELETE":
+                int index3 = Parser.parseNum(command.getArgs()) - 1;
+                Task deltask = tasks.getTask(index3);
+                tasks.removeTask(index3);
+                storage.saveTasks(tasks.getTaskList());
+                return captureOutput(() -> ui.showSuccess("You have deleted: " + deltask.getDescription()));
 
-                case "FIND":
-                    return captureOutput(() -> ui.find(tasks.getTaskList(), command.getArgs()));
+            case "FIND":
+                return captureOutput(() -> ui.find(tasks.getTaskList(), command.getArgs()));
 
-                case "DATE":
-                    return captureOutput(() -> {
-                        try {
-                            ui.showDates(tasks.getTaskList(), Parser.parseShowDate(command.getArgs()));
-                        } catch (SebException e) {
-                            throw new RuntimeException(e);
-                        }
-                    });
+            case "DATE":
+                return captureOutput(() -> {
+                    try {
+                        ui.showDates(tasks.getTaskList(), Parser.parseShowDate(command.getArgs()));
+                    } catch (SebException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
 
-                default:
-                    return captureOutput(() -> ui.showError("Sorry, I didn't understand that."));
-                }
-            } catch (Exception e) {
-                return captureOutput(() -> ui.showError(e.getMessage()));
+            default:
+                return captureOutput(() -> ui.showError("Sorry, I didn't understand that."));
             }
+        } catch (Exception e) {
+            return captureOutput(() -> ui.showError(e.getMessage()));
         }
+    }
 
-    
+    public String getWelcomeMessage() {
+        return "Hey there my queen! My name is Sebastian~\nHow can I help you? :)";
+    }
+
     public static void main(String[] args) throws SebException {
         new Sebastian(FILEPATH).run();
     }
