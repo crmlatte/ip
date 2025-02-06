@@ -1,4 +1,7 @@
 package seb.ui;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Sebastian {
@@ -26,79 +29,95 @@ public class Sebastian {
         while (true) {
             System.out.println("----------------------------------------------");
             String input = s.nextLine();
-            System.out.println("----------------------------------------------");
+            System.out.println(getResponse(input));
+            //System.out.println("----------------------------------------------");
 
-            try {
-                Command command = Parser.parse(input);
+            if (input.equalsIgnoreCase("bye")) {
+                ui.bye();
+                return;
+            }
+        }
+    }
 
-                switch (command.getCommand()) {
+    private String captureOutput(Runnable action) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        PrintStream ps = new PrintStream(outputStream);
+
+        System.setOut(ps);
+        action.run();
+        System.setOut(originalOut);
+        return outputStream.toString().trim();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+
+            switch (command.getCommand()) {
                 case "BYE":
-                    ui.bye();
-                    return;
+                    return captureOutput(() -> ui.bye());
 
                 case "LIST":
-                    ui.list(tasks.getTaskList());
-                    break;
+                    return captureOutput(() -> ui.list(tasks.getTaskList()));
 
                 case "TODO":
                     String desc = Parser.parseTodo(command.getArgs());
                     tasks.addTask(new Todo(desc, false));
                     storage.saveTasks(tasks.getTaskList());
-                    ui.showSuccess("You have successfully added task: " + desc);
-                    break;
+                    return captureOutput(() -> ui.showSuccess("You have successfully added task: " + desc));
 
                 case "DEADLINE":
                     String[] parts = Parser.parseDeadline(command.getArgs());
                     tasks.addTask(new Deadline(parts[0], parts[1], false));
                     storage.saveTasks(tasks.getTaskList());
-                    ui.showSuccess("You have successfully added deadline: " + parts[0]);
-                    break;
+                    return captureOutput(() -> ui.showSuccess("You have successfully added deadline: " + parts[0]));
 
                 case "EVENT":
                     String[] parts2 = Parser.parseEvent(command.getArgs());
                     tasks.addTask(new Event(parts2[0], parts2[1], parts2[2], false));
                     storage.saveTasks(tasks.getTaskList());
-                    ui.showSuccess("You have successfully added event: " + parts2[0]);
-                    break;
+                    return captureOutput(() -> ui.showSuccess("You have successfully added event: " + parts2[0]));
 
                 case "MARK":
                     int index = Parser.parseNum(command.getArgs()) - 1;
                     tasks.getTask(index).markDone();
                     storage.saveTasks(tasks.getTaskList());
-                    ui.showSuccess("Great! You have completed: " + tasks.getTask(index).getDescription());
-                    break;
+                    return captureOutput(() -> ui.showSuccess("Great! You have completed: " + tasks.getTask(index).getDescription()));
 
                 case "UNMARK":
                     int index2 = Parser.parseNum(command.getArgs()) - 1;
                     tasks.getTask(index2).markNotDone();
                     storage.saveTasks(tasks.getTaskList());
-                    ui.showSuccess("Okay, you have yet to finish: " + tasks.getTask(index2).getDescription());
-                    break;
+                    return captureOutput(() -> ui.showSuccess("Okay, you have yet to finish: " + tasks.getTask(index2).getDescription()));
 
                 case "DELETE":
                     int index3 = Parser.parseNum(command.getArgs()) - 1;
                     Task deltask = tasks.getTask(index3);
                     tasks.removeTask(index3);
                     storage.saveTasks(tasks.getTaskList());
-                    ui.showSuccess("You have deleted: " + deltask.getDescription());
-                    break;
+                    return captureOutput(() -> ui.showSuccess("You have deleted: " + deltask.getDescription()));
 
                 case "FIND":
-                    ui.find(tasks.getTaskList(), command.getArgs());
-                    break;
+                    return captureOutput(() -> ui.find(tasks.getTaskList(), command.getArgs()));
 
                 case "DATE":
-                    ui.showDates(tasks.getTaskList(), Parser.parseShowDate(command.getArgs()));
-                    break;
-                    
+                    return captureOutput(() -> {
+                        try {
+                            ui.showDates(tasks.getTaskList(), Parser.parseShowDate(command.getArgs()));
+                        } catch (SebException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+
                 default:
-                    ui.showError("Sorry, I didn't understand that.");
+                    return captureOutput(() -> ui.showError("Sorry, I didn't understand that."));
                 }
             } catch (Exception e) {
-                ui.showError(e.getMessage());
+                return captureOutput(() -> ui.showError(e.getMessage()));
             }
         }
-    }
+
     
     public static void main(String[] args) throws SebException {
         new Sebastian(FILEPATH).run();
