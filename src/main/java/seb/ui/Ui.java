@@ -9,14 +9,14 @@ public class Ui {
      * Welcome message printed when Sebastian runs
      */
     public void welcome() {
-        System.out.println("Hello! My name is Sebastian~\nHow can I help you? :)");
+        System.out.println("Hey there my queen! My name is Sebastian~\nHow can I help you? :)");
     }
 
     /**
      * Exit message printed for command-line input "bye"
      */
     public void bye() {
-        System.out.println("Bye! See you again :D");
+        System.out.println("Bye queen! I'll miss u pooks. Seeya :D");
     }
 
     /**
@@ -25,9 +25,9 @@ public class Ui {
      */
     public void list(ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
-            System.out.println("Your list is empty. Please add some tasks!");
+            System.out.println("Babes your list is empty. Please add some tasks!");
         } else {
-            System.out.println("Here is your list:");
+            System.out.println("Queen here is your list:");
             int counter = 1;
             for (int i = 0; i < tasks.size(); i++) {
                 System.out.println(counter + ". " + tasks.get(i).toString());
@@ -41,7 +41,7 @@ public class Ui {
      * @param message String message from exceptions
      */
     public void showError(String message) {
-        System.out.println("Error: " + message);
+        System.out.println("Ummm: " + message);
     }
 
     public void showSuccess(String message) {
@@ -69,7 +69,7 @@ public class Ui {
         if (matchingDates.isEmpty()) {
             System.out.println("Yay! You have no tasks on " + dateInput);
         } else {
-            System.out.println("You have " + matchingDates.size() + " tasks on " + dateInput);
+            System.out.println("Here queen. You have " + matchingDates.size() + " tasks on " + dateInput);
             int counter = 1;
             for (int i = 0; i < matchingDates.size(); i++) {
                 System.out.println(counter + ". " + matchingDates.get(i).toString());
@@ -93,7 +93,7 @@ public class Ui {
         if (matchingTasks.isEmpty()) {
             System.out.println("There are no matching tasks.");
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            System.out.println("Here queen. These are the matching tasks in your list:");
             int counter = 1;
             for (int i = 0; i < matchingTasks.size(); i++) {
                 System.out.println(counter + ". " + matchingTasks.get(i).toString());
