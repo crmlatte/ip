@@ -146,4 +146,28 @@ public class Parser {
             throw new SebException("Invalid date-time format! Please use dd-mm-yyyy");
         }
     }
+
+    /**
+     * Parses input following "update" command into String array
+     * of index of task in tasklist, and attribute to be edited
+     *
+     * @param input String input containing index and new value
+     * @return String array of [index, value]
+     * @throws SebException for invalid format to update
+     */
+    public static String[] parseUpdate(String input) throws SebException {
+        if (input.isEmpty()) {
+            throw new SebException("Please enter the task number and detail to be updated! " +
+                    "Eg 'update 3 description'");
+        }
+
+        String[] parts = input.split(" ", 3);
+        if (parts.length != 2) {
+            throw new SebException("Invalid update format. Please use: update [task no.] [task detail]");
+        }
+        for (int i = 0; i < parts.length; i++) {
+            parts[i] = parts[i].trim();
+        }
+        return parts;
+    }
 }

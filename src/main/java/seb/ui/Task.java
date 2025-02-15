@@ -22,6 +22,8 @@ public abstract class Task {
 
     public abstract String getDate();
 
+    public abstract void update(String detail, String value) throws SebException;
+
     public String getDescription() {
         return this.description;
     }

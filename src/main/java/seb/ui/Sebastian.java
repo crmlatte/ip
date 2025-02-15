@@ -110,6 +110,18 @@ public class Sebastian {
                     }
                 });
 
+            case "UPDATE":
+                String[] parts3 = Parser.parseUpdate(command.getArgs());
+                Task task = tasks.getTask(Parser.parseNum(parts3[0]) - 1);
+                System.out.println("Please enter the new " + parts3[1]);
+                Scanner s = new Scanner(System.in);
+                String value = s.nextLine();
+                task.update(parts3[1], value);
+                tasks.updateTask(task, Parser.parseNum(parts3[0]) - 1);
+                storage.saveTasks(tasks.getTaskList());
+                return captureOutput(() -> ui.showSuccess("Great! You have updated: "
+                        + task.getDescription()));
+
             default:
                 return captureOutput(() -> ui.showError("Sorry, I didn't understand that."));
             }

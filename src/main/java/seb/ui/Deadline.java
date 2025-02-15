@@ -19,6 +19,24 @@ public class Deadline extends Task {
         return this.deadLine;
     }
 
+    /**
+     * Update description or deadline of deadline task
+     *
+     * @param detail the attribute of deadline to be edited
+     * @param value the new attribute
+     * @throws SebException for invalid input
+     */
+    @Override
+    public void update(String detail, String value) throws SebException {
+        if (detail.contains("desc")) {
+            this.description = value;
+        } else if (detail.contains("deadline")) {
+            this.deadLine = Parser.parseDateTime(value);
+        } else {
+            throw new SebException("Invalid format!");
+        }
+    }
+
     @Override
     public String toFileFormat() {
         return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + this.deadLine;

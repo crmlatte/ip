@@ -21,6 +21,26 @@ public class Event extends Task {
         return this.start;
     }
 
+    /**
+     * Update description, start time or end time of event task
+     *
+     * @param detail the attribute of event to be edited
+     * @param value the new attribute
+     * @throws SebException for invalid input
+     */
+    @Override
+    public void update(String detail, String value) throws SebException {
+        if (detail.contains("desc")) {
+            this.description = value;
+        } else if (detail.contains("start")) {
+            this.start = Parser.parseDateTime(value);
+        } else if (detail.contains("end")) {
+            this.end = Parser.parseDateTime(value);
+        } else {
+            throw new SebException("Invalid format!");
+        }
+    }
+
     @Override
     public String toFileFormat() {
         return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + this.start + " | " + this.end;

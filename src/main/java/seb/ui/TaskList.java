@@ -67,4 +67,14 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Updates task in tasklist to new task
+     *
+     * @param task new task to be replaced in the list
+     * @param index index of task to be replaced
+     */
+    public void updateTask(Task task, int index) {
+        this.tasks.set(index, task);
+    }
+
 }
