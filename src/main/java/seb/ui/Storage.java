@@ -19,6 +19,7 @@ public class Storage {
     /**
      * Loads tasks from the file into ArrayList
      * Creates the file and directory if they don't exit
+     *
      * @return tasks in an ArrayList
      */
     public ArrayList<Task> loadTasks() {
@@ -27,7 +28,7 @@ public class Storage {
 
         try {
             if (!file.exists()) {
-                // create directory if file dont exist
+                // create directory if file does not exist
                 file.getParentFile().mkdirs();
                 file.createNewFile();
                 return tasks;
@@ -35,30 +36,45 @@ public class Storage {
             Scanner fileScanner = new Scanner(file);
             while (fileScanner.hasNextLine()) {
                 String line = fileScanner.nextLine();
-                String[] parts = line.split(" \\| ");
-                String taskType = parts[0];
-                boolean isDone = parts[1].equals("1");
-                String description = parts[2];
-
-                switch (taskType) {
-                case "T":
-                    tasks.add(new Todo(description, isDone));
-                    break;
-                case "D":
-                    String due = parts[3];
-                    tasks.add(new Deadline(description, due, isDone));
-                    break;
-                case "E":
-                    String start = parts[3];
-                    String end = parts[4];
-                    tasks.add(new Event(description, start, end, isDone));
-                    break;
+                Task task = parseTaskLine(line);
+                if (task != null) {
+                    tasks.add(task);
                 }
             }
         } catch (IOException e) {
             System.out.println("Error loading tasks: " + e.getMessage());
         }
         return tasks;
+    }
+
+    /**
+     * Parses tasks from file format to Task object
+     *
+     * @param line String containing details of each task
+     * @return new Task from each String of tasks in file format
+     */
+    public Task parseTaskLine(String line) {
+
+        String[] parts = line.split(" \\| ");
+
+        String taskType = parts[0];
+        boolean isDone = parts[1].equals("1");
+        String description = parts[2];
+
+        switch (taskType) {
+            case "T":
+                return new Todo(description, isDone);
+            case "D":
+                String due = parts[3];
+                return new Deadline(description, due, isDone);
+            case "E":
+                String start = parts[3];
+                String end = parts[4];
+                return new Event(description, start, end, isDone);
+            default:
+                System.out.println("Umm I cant identify that task " + taskType);
+                return null;
+        }
     }
 
     public void saveTasks(ArrayList<Task> tasks) {

@@ -23,7 +23,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    //private Seb seb;
     private Sebastian sebastian;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/userphoto.jpeg"));
@@ -45,7 +44,8 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getSebDialog(sebastian.getWelcomeMessage(), sebImage));    }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Seb's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other
+     * containing Seb's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
