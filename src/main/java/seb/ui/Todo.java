@@ -7,6 +7,7 @@ public class Todo extends Task {
 
     /**
      * Converts Todo object to String to be stored in data file
+     *
      * @return String of event details
      */
     @Override

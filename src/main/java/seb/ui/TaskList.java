@@ -15,6 +15,7 @@ public class TaskList {
 
     /**
      * Adds task to ArrayList
+     *
      * @param t task to be added
      * @throws SebException if task is invalid
      */
@@ -24,9 +25,10 @@ public class TaskList {
 
     /**
      * Remove task from ArrayList
+     *
      * @param i index of task to be removed from ArrayList
-     * @throws IndexOutOfBoundsException if index entered is exceeding number of
-     * items in list or < 0
+     * @throws IndexOutOfBoundsException if index entered
+     * is exceeding number of items in list or < 0
      */
     public void removeTask(int i) throws IndexOutOfBoundsException {
         assert i >= 0 : "Index cannot be negative";
@@ -36,6 +38,7 @@ public class TaskList {
 
     /**
      * Returns number of items in ArrayList
+     *
      * @return integer number
      */
     public int size() {
@@ -44,6 +47,7 @@ public class TaskList {
 
     /**
      * Returns Task object from ArrayList
+     *
      * @param i index of Task to be obtained
      * @return Task
      * @throws IndexOutOfBoundsException for invalid index
@@ -56,6 +60,7 @@ public class TaskList {
 
     /**
      * Returns ArrayList of entire task list
+     *
      * @return ArrayList
      */
     public ArrayList<Task> getTaskList() {

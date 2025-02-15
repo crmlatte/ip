@@ -13,6 +13,7 @@ public class Event extends Task {
 
     /**
      * Converts Event object to String to be stored in data file
+     *
      * @return String of event details
      */
     @Override

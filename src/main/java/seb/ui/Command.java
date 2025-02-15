@@ -13,6 +13,7 @@ public class Command {
     /**
      * Returns String of Command in uppercase
      * eg "bye" -> "BYE"
+     *
      * @return String of command
      */
     public String getCommand() {
@@ -21,6 +22,7 @@ public class Command {
 
     /**
      * Returns args variable in Command object
+     *
      * @return String of args
      */
     public String getArgs() {
