@@ -30,7 +30,6 @@ public class Sebastian {
             System.out.println("----------------------------------------------");
             String input = s.nextLine();
             System.out.println(getResponse(input));
-            //System.out.println("----------------------------------------------");
 
             if (input.equalsIgnoreCase("bye")) {
                 return;
@@ -50,6 +49,8 @@ public class Sebastian {
     }
 
     public String getResponse(String input) {
+        assert input != null : "Input cannot be null.";
+
         try {
             Command command = Parser.parse(input);
 

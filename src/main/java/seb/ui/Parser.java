@@ -14,6 +14,8 @@ public class Parser {
      * @throws SebException if command-line input is empty
      */
     public static Command parse(String input) throws SebException {
+        assert input != null : "Input cannot be null.";
+
         if (input.isEmpty()) {
             throw new SebException("Please enter something!");
         }
@@ -34,6 +36,8 @@ public class Parser {
      * @throws SebException if todo description is empty
      */
     public static String parseTodo(String input) throws SebException {
+        assert input != null : "Input cannot be null.";
+
         if (input.isEmpty()) {
             throw new SebException("Description cannot be empty!");
         }
@@ -48,6 +52,8 @@ public class Parser {
      * @throws SebException if format of deadline is incorrect
      */
     public static String[] parseDeadline(String input) throws SebException{
+        assert input != null : "Input cannot be null.";
+
         String[] parts = input.split("/", 4);
         if (parts.length != 2) {
             throw new SebException("Invalid Deadline format. Please use: deadline [name] /[by when]");
@@ -66,6 +72,8 @@ public class Parser {
      * @throws SebException if format of event is incorrect
      */
     public static String[] parseEvent(String input) throws SebException{
+        assert input != null : "Input cannot be null.";
+
         String[] parts = input.split("/", 4);
         if (parts.length != 3) {
             throw new SebException("Invalid Event format. Please use: event [name] /[from] /[to]");
@@ -94,6 +102,8 @@ public class Parser {
      * @throws SebException for incorrect format of input
      */
     public static String parseDateTime(String input) throws SebException {
+        assert input != null : "Input cannot be null.";
+
         try {
             DateTimeFormatter formatInput = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
             LocalDateTime dateTime = LocalDateTime.parse(input, formatInput);
@@ -114,6 +124,8 @@ public class Parser {
      * @throws SebException for incorrect format of date
      */
     public static String parseShowDate(String input) throws SebException {
+        assert input != null : "Input cannot be null.";
+
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate dateTime = LocalDate.parse(input, formatter);

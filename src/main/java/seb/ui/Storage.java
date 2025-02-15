@@ -11,6 +11,8 @@ public class Storage {
     private final String filePath;
 
     public Storage(String filepath) {
+        assert filepath != null : "Filepath cannot be null!";
+
         this.filePath = filepath;
     }
 
