@@ -21,6 +21,7 @@ public class Ui {
 
     /**
      * Prints all tasks stored in ArrayList
+     *
      * @param tasks list of all tasks
      */
     public void list(ArrayList<Task> tasks) {
@@ -38,6 +39,7 @@ public class Ui {
 
     /**
      * Prints error message from exceptions thrown
+     *
      * @param message String message from exceptions
      */
     public void showError(String message) {
@@ -50,6 +52,7 @@ public class Ui {
 
     /**
      * Prints all tasks on given date
+     *
      * @param dateInput String input of date, no time
      * @throws SebException for incorrect date format
      */
@@ -80,6 +83,7 @@ public class Ui {
 
     /**
      * Prints all tasks with matching description with input String
+     *
      * @param tasks ArrayList tasks
      * @param search String of keyword to match
      */

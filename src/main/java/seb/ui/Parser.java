@@ -9,6 +9,7 @@ public class Parser {
     /**
      * Parses command-line input into "command" and "args"
      * eg "deadline" + "quiz 3/12-01-2025 1600"
+     *
      * @param input String input from command-line
      * @return Command object containing a Command string and Args string
      * @throws SebException if command-line input is empty
@@ -29,6 +30,7 @@ public class Parser {
 
     /**
      * Returns a String that checks if Todo input is an empty task
+     *
      * @param input Args of the Command (description of todo)
      * @return String description of todo
      * @throws SebException if todo description is empty
@@ -43,6 +45,7 @@ public class Parser {
     /**
      * Returns a String array containing elements of Deadline object
      * eg [description, deadline] split from Args from Command
+     *
      * @param input Args of the Command
      * @return String array
      * @throws SebException if format of deadline is incorrect
@@ -61,6 +64,7 @@ public class Parser {
     /**
      * Returns a String array containing elements of Event object
      * eg [description, start, end] split from Args from Command
+     *
      * @param input Args of Command object
      * @return String array
      * @throws SebException if format of event is incorrect
@@ -79,6 +83,7 @@ public class Parser {
     /**
      * Returns an integer from command line String input eg "mark 3"
      * will return (int) 3
+     *
      * @param input Args of Command object
      * @return integer value of String number
      */
@@ -89,6 +94,7 @@ public class Parser {
     /**
      * Return String of date time converted to readable format
      * eg from input 24-01-2025 1600 -> Fri, 24 Jan 2025 16:00
+     *
      * @param input String of date time from Command args
      * @return String of date time in reader friendly format
      * @throws SebException for incorrect format of input
@@ -109,6 +115,7 @@ public class Parser {
      * Returns String of date formatted from input
      * eg 24-01-2025 -> Fri, 24 Jan 2025
      * Used for finding tasks by date in showDates() function in TaskList
+     *
      * @param input String from command-line Command args
      * @return String of formatted date
      * @throws SebException for incorrect format of date
