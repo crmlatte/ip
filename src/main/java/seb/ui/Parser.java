@@ -64,6 +64,7 @@ public class Parser {
         for (int i = 0; i < parts.length; i++) {
             parts[i] = parts[i].trim();
         }
+        parts[1] = parseDateTime(parts[1]);
         return parts;
     }
 
@@ -85,6 +86,8 @@ public class Parser {
         for (int i = 0; i < parts.length; i++) {
             parts[i] = parts[i].trim();
         }
+        parts[1] = parseDateTime(parts[1]);
+        parts[2] = parseDateTime(parts[2]);
         return parts;
     }
 
