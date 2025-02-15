@@ -29,6 +29,8 @@ public class TaskList {
      * items in list or < 0
      */
     public void removeTask(int i) throws IndexOutOfBoundsException {
+        assert i >= 0 : "Index cannot be negative";
+
         tasks.remove(i);
     }
 
@@ -47,6 +49,8 @@ public class TaskList {
      * @throws IndexOutOfBoundsException for invalid index
      */
     public Task getTask(int i) throws IndexOutOfBoundsException {
+        assert i >= 0 : "Index cannot be negative";
+
         return tasks.get(i);
     }
 
