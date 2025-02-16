@@ -54,7 +54,7 @@ public class Parser {
      * @return String array
      * @throws SebException if format of deadline is incorrect
      */
-    public static String[] parseDeadline(String input) throws SebException{
+    public static String[] parseDeadline(String input) throws SebException {
         assert input != null : "Input cannot be null.";
 
         String[] parts = input.split("/", 4);
@@ -64,7 +64,36 @@ public class Parser {
         for (int i = 0; i < parts.length; i++) {
             parts[i] = parts[i].trim();
         }
-        parts[1] = parseDateTime(parts[1]);
+        parts[1] = checkDateValidity(parseDateTime(parts[1]));
+        return parts;
+    }
+
+    /**
+     * Error handling to check if dates entered are valid
+     * ie if they are in the future, and start date is before end date
+     *
+     * @param date date to be checked
+     * @return date in correct format IF it is valid
+     * @throws SebException if date is invalid
+     */
+    public static String checkDateValidity(LocalDateTime date) throws SebException {
+        if (date.isBefore(LocalDateTime.now())) {
+            throw new SebException("Date entered cannot be in the past!");
+        }
+        DateTimeFormatter formatOutput = DateTimeFormatter.ofPattern("E, dd MMM yyyy HH:mm");
+        String formattedDT = date.format(formatOutput);
+        return formattedDT;
+    }
+
+    public static String[] checkDateValidity(LocalDateTime date1, LocalDateTime date2) throws SebException {
+        if (date1.isBefore(LocalDateTime.now()) || date2.isBefore(LocalDateTime.now())) {
+            throw new SebException("Date entered cannot be in the past!");
+        }
+        if (date2.isBefore(date1)) {
+            throw new SebException("End date must be after start date!");
+        }
+        DateTimeFormatter formatOutput = DateTimeFormatter.ofPattern("E, dd MMM yyyy HH:mm");
+        String[] parts = {date1.format(formatOutput), date2.format(formatOutput)};
         return parts;
     }
 
@@ -76,7 +105,7 @@ public class Parser {
      * @return String array
      * @throws SebException if format of event is incorrect
      */
-    public static String[] parseEvent(String input) throws SebException{
+    public static String[] parseEvent(String input) throws SebException {
         assert input != null : "Input cannot be null.";
 
         String[] parts = input.split("/", 4);
@@ -86,8 +115,9 @@ public class Parser {
         for (int i = 0; i < parts.length; i++) {
             parts[i] = parts[i].trim();
         }
-        parts[1] = parseDateTime(parts[1]);
-        parts[2] = parseDateTime(parts[2]);
+        String[] dates = checkDateValidity(parseDateTime(parts[1]), parseDateTime(parts[2]));
+        parts[1] = dates[0];
+        parts[2] = dates[1];
         return parts;
     }
 
@@ -110,15 +140,13 @@ public class Parser {
      * @return String of date time in reader friendly format
      * @throws SebException for incorrect format of input
      */
-    public static String parseDateTime(String input) throws SebException {
+    public static LocalDateTime parseDateTime(String input) throws SebException {
         assert input != null : "Input cannot be null.";
 
         try {
             DateTimeFormatter formatInput = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
             LocalDateTime dateTime = LocalDateTime.parse(input, formatInput);
-            DateTimeFormatter formatOutput = DateTimeFormatter.ofPattern("E, dd MMM yyyy HH:mm");
-            String formattedDT = dateTime.format(formatOutput);
-            return formattedDT;
+            return dateTime;
         } catch (DateTimeParseException e) {
             throw new SebException("Invalid date-time format! Please use dd-mm-yyyy HHmm");
         }

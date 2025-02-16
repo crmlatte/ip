@@ -1,5 +1,8 @@
 package seb.ui;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
     private String start;
@@ -33,9 +36,13 @@ public class Event extends Task {
         if (detail.contains("desc")) {
             this.description = value;
         } else if (detail.contains("start")) {
-            this.start = Parser.parseDateTime(value);
+            DateTimeFormatter formatInput = DateTimeFormatter.ofPattern("E, dd MMM yyyy HH:mm");
+            LocalDateTime compare = LocalDateTime.parse(this.end, formatInput);
+            this.start = Parser.checkDateValidity(Parser.parseDateTime(value), compare)[0];
         } else if (detail.contains("end")) {
-            this.end = Parser.parseDateTime(value);
+            DateTimeFormatter formatInput = DateTimeFormatter.ofPattern("E, dd MMM yyyy HH:mm");
+            LocalDateTime compare = LocalDateTime.parse(this.start, formatInput);
+            this.end = Parser.checkDateValidity(compare, Parser.parseDateTime(value))[1];
         } else {
             throw new SebException("Invalid format!");
         }

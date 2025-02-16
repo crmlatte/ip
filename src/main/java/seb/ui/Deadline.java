@@ -1,5 +1,8 @@
 package seb.ui;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
     private String deadLine;
@@ -31,7 +34,7 @@ public class Deadline extends Task {
         if (detail.contains("desc")) {
             this.description = value;
         } else if (detail.contains("deadline")) {
-            this.deadLine = Parser.parseDateTime(value);
+            this.deadLine = Parser.checkDateValidity(Parser.parseDateTime(value));
         } else {
             throw new SebException("Invalid format!");
         }
