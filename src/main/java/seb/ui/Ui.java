@@ -1,8 +1,23 @@
 package seb.ui;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Ui {
 
+    private Random random = new Random();
+    private String[] responses = {
+        "Damn, girl, is your name Wifi? Because I’m feeling a connection!",
+        "Do you have a map? I just got lost in your eyes",
+        "Are you French, girl? Because Eiffel for you.",
+        "If beauty were a crime, you’d be serving a life sentence.",
+        "Are you sure you’re not tired? You’ve been running through my mind all day.",
+        "I thought happiness started with an H. Why does mine start with U?",
+        "I’m not good at holding conversations. Can I hold your hand instead?",
+        "I must be in a museum, because you truly are a work of art.",
+        "Did it hurt? When you fell from heaven?",
+        "I seem to have lost my phone number. Can I have yours?",
+        "Are you a time traveler? Because I see you in my future."
+    };
     public Ui() {}
 
     /**
@@ -43,7 +58,7 @@ public class Ui {
      * @param message String message from exceptions
      */
     public void showError(String message) {
-        System.out.println("Ummm: " + message);
+        System.out.println("Girl.. " + message);
     }
 
     public void showSuccess(String message) {
@@ -95,7 +110,7 @@ public class Ui {
             }
         }
         if (matchingTasks.isEmpty()) {
-            System.out.println("There are no matching tasks.");
+            System.out.println("Oh! There are no matching tasks queen");
         } else {
             System.out.println("Here queen. These are the matching tasks in your list:");
             int counter = 1;
@@ -104,5 +119,10 @@ public class Ui {
                 counter++;
             }
         }
+    }
+
+    public void sebby() {
+        int index = random.nextInt(11);
+        System.out.println(responses[index]);
     }
 }

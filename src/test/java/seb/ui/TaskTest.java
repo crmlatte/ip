@@ -1,12 +1,11 @@
 package seb.ui;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.time.LocalDateTime;
-
-// Concrete subclass of Task for testing purposes
 
 class TaskTest {
 

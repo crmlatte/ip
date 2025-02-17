@@ -65,25 +65,26 @@ public class Sebastian {
                 String desc = Parser.parseTodo(command.getArgs());
                 tasks.addTask(new Todo(desc, false));
                 storage.saveTasks(tasks.getTaskList());
-                return captureOutput(() -> ui.showSuccess("You have successfully added task: " + desc));
+                return captureOutput(() -> ui.showSuccess("Okay! You have successfully added task: " + desc));
 
             case "DEADLINE":
                 String[] parts = Parser.parseDeadline(command.getArgs());
                 tasks.addTask(new Deadline(parts[0], parts[1], false));
                 storage.saveTasks(tasks.getTaskList());
-                return captureOutput(() -> ui.showSuccess("You have successfully added deadline: " + parts[0]));
+                return captureOutput(() -> ui.showSuccess("Yay! You have successfully added deadline: " + parts[0]));
 
             case "EVENT":
                 String[] parts2 = Parser.parseEvent(command.getArgs());
                 tasks.addTask(new Event(parts2[0], parts2[1], parts2[2], false));
                 storage.saveTasks(tasks.getTaskList());
-                return captureOutput(() -> ui.showSuccess("You have successfully added event: " + parts2[0]));
+                return captureOutput(() -> ui.showSuccess("Nice! You have successfully added event: " + parts2[0]));
 
             case "MARK":
                 int index = Parser.parseNum(command.getArgs()) - 1;
                 tasks.getTask(index).markDone();
                 storage.saveTasks(tasks.getTaskList());
-                return captureOutput(() -> ui.showSuccess("Great! You have completed: " + tasks.getTask(index).getDescription()));
+                return captureOutput(() -> ui.showSuccess("Amazing! You have completed: "
+                        + tasks.getTask(index).getDescription()));
 
             case "UNMARK":
                 int index2 = Parser.parseNum(command.getArgs()) - 1;
@@ -96,7 +97,7 @@ public class Sebastian {
                 Task deltask = tasks.getTask(index3);
                 tasks.removeTask(index3);
                 storage.saveTasks(tasks.getTaskList());
-                return captureOutput(() -> ui.showSuccess("You have deleted: " + deltask.getDescription()));
+                return captureOutput(() -> ui.showSuccess("Aight! You have deleted: " + deltask.getDescription()));
 
             case "FIND":
                 return captureOutput(() -> ui.find(tasks.getTaskList(), command.getArgs()));
@@ -113,6 +114,7 @@ public class Sebastian {
             case "UPDATE":
                 String[] parts3 = Parser.parseUpdate(command.getArgs());
                 Task task = tasks.getTask(Parser.parseNum(parts3[0]) - 1);
+
                 System.out.println("Please enter the new " + parts3[1]);
                 Scanner s = new Scanner(System.in);
                 String value = s.nextLine();
@@ -122,8 +124,11 @@ public class Sebastian {
                 return captureOutput(() -> ui.showSuccess("Great! You have updated: "
                         + task.getDescription()));
 
+            case "HEY":
+                return captureOutput(() -> ui.sebby());
+
             default:
-                return captureOutput(() -> ui.showError("Sorry, I didn't understand that."));
+                return captureOutput(() -> ui.showError("Sorry dear, I didn't understand that."));
             }
         } catch (Exception e) {
             return captureOutput(() -> ui.showError(e.getMessage()));
