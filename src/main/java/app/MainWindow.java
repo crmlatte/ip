@@ -24,7 +24,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Sebastian sebastian;
-
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/userphoto.jpeg"));
     private Image sebImage = new Image(this.getClass().getResourceAsStream("/images/sebphoto.jpeg"));
 
@@ -41,7 +40,8 @@ public class MainWindow extends AnchorPane {
     public void setSeb(Sebastian seb) {
         this.sebastian = seb;
         dialogContainer.getChildren().add(
-                DialogBox.getSebDialog(sebastian.getWelcomeMessage(), sebImage));    }
+                DialogBox.getSebDialog(sebastian.getWelcomeMessage(), sebImage));
+    }
 
     /**
      * Creates two dialog boxes, one echoing user input and the other
@@ -59,11 +59,6 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         if (input.equalsIgnoreCase("bye")) {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getSebDialog(response, sebImage)
-            );
-            //Platform.exit();
             userInput.setDisable(true);
             sendButton.setDisable(true);
             dialogContainer.getChildren().add(DialogBox.getSebDialog(
