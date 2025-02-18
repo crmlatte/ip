@@ -86,11 +86,10 @@ public class Parser {
     }
 
     public static String[] checkDateValidity(LocalDateTime date1, LocalDateTime date2) throws SebException {
-        if (date1.isBefore(LocalDateTime.now()) || date2.isBefore(LocalDateTime.now())) {
-            throw new SebException("Date entered cannot be in the past!");
-        }
         if (date2.isBefore(date1)) {
             throw new SebException("End date must be after start date!");
+        } else if (date2.isBefore(LocalDateTime.now())) {
+            throw new SebException("End date entered cannot be in the past!");
         }
         DateTimeFormatter formatOutput = DateTimeFormatter.ofPattern("E, dd MMM yyyy HH:mm");
         String[] parts = {date1.format(formatOutput), date2.format(formatOutput)};
