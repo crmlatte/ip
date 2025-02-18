@@ -2,12 +2,12 @@ package app;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import seb.ui.SebException;
 import seb.ui.Sebastian;
 
 /**
@@ -49,7 +49,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws SebException {
         String input = userInput.getText();
         String response = sebastian.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -57,6 +57,18 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getSebDialog(response, sebImage)
         );
         userInput.clear();
+
+        if (input.equalsIgnoreCase("bye")) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getSebDialog(response, sebImage)
+            );
+            //Platform.exit();
+            userInput.setDisable(true);
+            sendButton.setDisable(true);
+            dialogContainer.getChildren().add(DialogBox.getSebDialog(
+                    "Session has ended queen :( Restart the program so we can talk again.", sebImage));
+        }
     }
 }
 
