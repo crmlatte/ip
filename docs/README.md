@@ -44,6 +44,6 @@ I must be in a museum, because you truly are a work of art!
 - **bye** `bye`
 
 ### sample screenshots
-![Screenshot 2025-02-19 at 5.52.49 PM.png](..%2F..%2FDesktop%2FScreenshot%202025-02-19%20at%205.52.49%E2%80%AFPM.png)
-![Screenshot 2025-02-19 at 5.54.30 PM.png](..%2F..%2FDesktop%2FScreenshot%202025-02-19%20at%205.54.30%E2%80%AFPM.png)
-![Screenshot 2025-02-19 at 5.54.53 PM.png](..%2F..%2FDesktop%2FScreenshot%202025-02-19%20at%205.54.53%E2%80%AFPM.png)
+![ss1.png](extras%2Fss1.png)
+![ss2.png](extras%2Fss2.png)
+![ss3.png](extras%2Fss3.png)
